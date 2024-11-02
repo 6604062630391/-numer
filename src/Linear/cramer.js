@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const CramersRule = () => {
   const [matrixA, setMatrixA] = useState([[-2, 3, 1], [3, 4, -5], [1, -2, 1]]);
@@ -29,6 +30,28 @@ const CramersRule = () => {
   };
 
   const calculateCramersRule = () => {
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (isNaN(matrixA[i][j])) {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Please fill all fields in Matrix A.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+          });
+          return;
+        }
+      }
+      if (isNaN(matrixB[i][0])) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Please fill all fields in Matrix B.',
+          icon: 'error',
+          confirmButtonText: 'Okay'
+        });
+        return;
+      }
+    }
     const determinantA = calculateDeterminant(matrixA);
     const tempResults = [];
 
@@ -37,7 +60,12 @@ const CramersRule = () => {
       replaceColumn(tempMatrix, matrixB, i);
       tempResults[i] = calculateDeterminant(tempMatrix) / determinantA;
     }
-
+    Swal.fire({
+      title: 'Success!',
+      text: 'Calculation completed successfully!',
+      icon: 'success',
+      confirmButtonText: 'Cool'
+    });
     setResults(tempResults);
   };
 
@@ -82,7 +110,7 @@ const CramersRule = () => {
                 type="number"
                 value={matrixB[row][0]}
                 onChange={(e) => updateMatrixB(row, e.target.value)}
-                style={{ width: "355px" }} // ปรับความกว้างของ Matrix B เท่านั้น
+                style={{ width: "355px" }} 
               />
             </Col>
           </Row>

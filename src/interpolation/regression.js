@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const LinearRegression = () => {
     const [xi, setXi] = useState([10, 15, 20, 30, 40, 50, 60, 70, 80]);
@@ -22,6 +23,19 @@ const LinearRegression = () => {
     };
 
     const calculateRegression = () => {
+        const isXiComplete = xi.every(value => !isNaN(value) && value !== "");
+        const isYiComplete = yi.every(value => !isNaN(value) && value !== "");
+        const isInputXValid = !isNaN(parseFloat(inputX)) && inputX !== "";
+
+        if (!isXiComplete || !isYiComplete || !isInputXValid) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please fill in all the input fields.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            return;
+        }
         const n = xi.length;
         let sumxy = 0, sumx = 0, sumy = 0, sumx2 = 0;
 
@@ -37,6 +51,12 @@ const LinearRegression = () => {
         setA0(a0);
         setA1(a1);
         setResult(a0 + a1 * parseFloat(inputX));
+        Swal.fire({
+            title: 'Success!',
+            text: 'Calculation completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'Cool!'
+        });
     };
 
     return (

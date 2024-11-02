@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Button, Form } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const OnePoint = () => {
     const [inputValue, setInputValue] = useState("");
@@ -35,17 +36,28 @@ const OnePoint = () => {
         if (!isNaN(a) && a >= 0) {
             const approximateRoot = sqrtApprox(a);
             setResult(approximateRoot.toFixed(5));
+            Swal.fire({
+                title: 'Success!',
+                text: 'Calculation completed successfully!',
+                icon: 'success',
+                confirmButtonText: 'Cool!'
+            });
         } else {
-            alert("Please enter a valid non-negative number.");
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please enter a valid non-negative number.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
             setResult(null);
         }
     };
 
     return (
         <Container>
-            <h3 style={{ marginTop: "40px" ,fontWeight: 'bold' }}>One Point</h3>
+            <h3 className="d-flex flex-column align-items-center" style={{ fontWeight: 'bold' }}>One Point</h3>
             <Form>
-                <Form.Group className="mb-3">
+                <Form.Group className="d-flex flex-column align-items-center" >
                     <Form.Label>Enter a number to find its square root:</Form.Label>
                     <Form.Control
                         type="number"
@@ -55,7 +67,7 @@ const OnePoint = () => {
                         style={{ width: "150px" }}
                     />
                 </Form.Group>
-                <Button variant="dark" onClick={handleCalculate}>
+                <Button className="mx-auto d-block" variant="dark" style={{ marginTop: "20px" }} onClick={handleCalculate}>
                     Calculate
                 </Button>
             </Form>

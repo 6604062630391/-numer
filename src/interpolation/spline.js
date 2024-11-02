@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const LinearSplineInterpolation = () => {
     const [inputX, setInputX] = useState(["2", "4", "6", "8", "10"]);
@@ -8,11 +9,29 @@ const LinearSplineInterpolation = () => {
     const [result, setResult] = useState(null);
 
     const handleCalculate = () => {
+
         const x = inputX.map(Number);
         const y = inputY.map(Number);
         const a = parseFloat(inputA);
+
+        if (isNaN(x) || !isNaN(y) || !a) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please fill in all the input fields.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            return;
+        }
+
         const fx = calculateLinearSpline(x, y, a);
         setResult(fx);
+        Swal.fire({
+            title: 'Success!',
+            text: 'Calculation completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'Cool!'
+        });
     };
 
     const calculateLinearSpline = (x, y, a) => {
@@ -26,7 +45,7 @@ const LinearSplineInterpolation = () => {
                 return y[i] + mi[i] * (a - x[i]);
             }
         }
-        return null; // กรณี a อยู่นอกช่วง
+        return null; 
     };
 
     const handleInputXChange = (index, value) => {

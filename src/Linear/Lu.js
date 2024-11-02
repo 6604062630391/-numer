@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const LUDecomposition = () => {
   const [matrixA, setMatrixA] = useState([
@@ -26,6 +27,18 @@ const LUDecomposition = () => {
   };
 
   const calculateLU = () => {
+    const isMatrixAComplete = matrixA.flat().every(num => !isNaN(num));
+    const isMatrixBComplete = matrixB.every(num => !isNaN(num));
+
+    if (!isMatrixAComplete || !isMatrixBComplete) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill all fields in Matrix.',
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      });
+      return; 
+    }
     const L = Array.from({ length: 3 }, () => Array(3).fill(0));
     const U = Array.from({ length: 3 }, () => Array(3).fill(0));
     const y = Array(3).fill(0);
@@ -57,6 +70,12 @@ const LUDecomposition = () => {
     x[0] = y[0] - U[0][1] * x[1] - U[0][2] * x[2];
 
     setX(x);
+    Swal.fire({
+      title: 'Success!',
+      text: 'Calculation completed successfully!',
+      icon: 'success',
+      confirmButtonText: 'Cool!'
+    });
   };
 
   const renderMatrix = (matrix) => {

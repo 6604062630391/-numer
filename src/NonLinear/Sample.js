@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
 import { evaluate } from 'mathjs'
-
+import Swal from 'sweetalert2'
 
 const Sample = () => {
     const print = () => {
@@ -95,8 +95,8 @@ const Sample = () => {
     const [html, setHtml] = useState(null);
     const [Equation, setEquation] = useState("(x^4)-13")
     const [X, setX] = useState(0)
-    const [XL, setXL] = useState(0)
-    const [XR, setXR] = useState(0)
+    const [XL, setXL] = useState(" ")
+    const [XR, setXR] = useState(" ")
 
     const inputEquation = (event) => {
         console.log(event.target.value)
@@ -116,10 +116,25 @@ const Sample = () => {
     const calculateRoot = () => {
         const xlnum = parseFloat(XL)
         const xrnum = parseFloat(XR)
+        if (isNaN(xlnum) || isNaN(xrnum) || Equation.trim() === '') {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please enter the number and the equation!',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            return; // ออกจากฟังก์ชันถ้ายังไม่ได้กรอกข้อมูล
+        }
+    
         Calbisection(xlnum, xrnum);
 
         setHtml(print());
-
+        Swal.fire({
+            title: 'Success!',
+            text: 'Calculation completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        });
         console.log(valueIter)
         console.log(valueXl)
     }

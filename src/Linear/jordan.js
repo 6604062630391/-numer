@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const GaussJordan = () => {
   const [matrixA, setMatrixA] = useState([[-2, 3, 1], [3, 4, -5], [1, -2, 1]]);
@@ -14,6 +15,19 @@ const GaussJordan = () => {
   };
 
   const gaussJordan = () => {
+    const isMatrixAComplete = matrixA.flat().every(num => !isNaN(num));
+    const isMatrixBComplete = matrixB.every(num => !isNaN(num));
+
+    if (!isMatrixAComplete || !isMatrixBComplete) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill all fields in Matrix.',
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      });
+      return;
+    }
+
     let A = JSON.parse(JSON.stringify(matrixA));
     let B = [...matrixB]; 
     const tempIterations = []; 
@@ -43,7 +57,16 @@ const GaussJordan = () => {
     }
 
     setResults(B);
-    setIterations(tempIterations); 
+    setIterations(tempIterations);
+
+    Swal.fire({
+      title: 'Success!',
+      text: 'Calculation completed successfully!',
+      icon: 'success',
+      confirmButtonText: 'Cool!'
+    });
+
+
   };
 
   const updateMatrixA = (row, col, value) => {

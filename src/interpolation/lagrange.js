@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-
+import Swal from 'sweetalert2';
 const LagrangeInterpolation = () => {
     const initialXValues = [0, 20000, 40000, 60000, 80000];
     const initialYValues = [9.81, 9.7487, 9.6879, 9.6879, 9.5682];
@@ -24,6 +24,21 @@ const LagrangeInterpolation = () => {
     };
 
     const handleCalculate = () => {
+
+        
+        const allXValid = xValues.every((value) => !isNaN(value));
+        const allYValid = yValues.every((value) => !isNaN(value));
+
+        if (!allXValid || !allYValid || isNaN(inputX)) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please fill all fields correctly and ensure they are numbers.',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            return;
+        }
+
         const yLinear = lagrange([xValues[0], xValues[4]], [yValues[0], yValues[4]], 2, Number(inputX));
         const yQuadratic = lagrange([xValues[0], xValues[2], xValues[4]], [yValues[0], yValues[2], yValues[4]], 3, Number(inputX));
         const yPolynomial = lagrange(xValues.map(Number), yValues.map(Number), xValues.length, Number(inputX));
@@ -33,8 +48,14 @@ const LagrangeInterpolation = () => {
             quadratic: yQuadratic,
             polynomial: yPolynomial,
         });
+        Swal.fire({
+            title: 'Success!',
+            text: 'Calculation completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'Cool!'
+        });
     };
-
+    
     const handleXChange = (index, value) => {
         const newXValues = [...xValues];
         newXValues[index] = parseFloat(value);

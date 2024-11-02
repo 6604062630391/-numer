@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import Swal from 'sweetalert2'
 
 const NewtonRaphson = () => {
   const [inputValue, setInputValue] = useState(""); 
@@ -29,8 +30,20 @@ const NewtonRaphson = () => {
     if (!isNaN(a) && a >= 0) {
       const calculatedResult = sqrtApprox(a, initial);
       setResult(calculatedResult.toFixed(6));
+      Swal.fire({
+        title: 'Success!',
+        text: 'Calculation completed successfully!',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+    });
     } else {
       setResult("Please enter a valid non-negative number.");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please enter a valid non-negative number.',
+        icon: 'error',
+        confirmButtonText: 'Okay'
+    });
     }
   };
 

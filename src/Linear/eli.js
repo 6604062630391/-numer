@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Button, Container, Form, Table, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const GaussianElimination = () => {
   const [matrixA, setMatrixA] = useState([[-2, 3, 1], [3, 4, -5], [1, -2, 1]]);
   const [matrixB, setMatrixB] = useState([9, 0, -4]);
   const [results, setResults] = useState([]);
-  const [iterations, setIterations] = useState([]); // State สำหรับเก็บค่า iteration
+  const [iterations, setIterations] = useState([]); 
 
   const printMatrix = (A, B) => {
     return A.map((row, i) => {
@@ -14,9 +15,22 @@ const GaussianElimination = () => {
   };
 
   const gaussElimination = () => {
-    let A = JSON.parse(JSON.stringify(matrixA)); // ทำสำเนา A
-    let B = [...matrixB]; // ทำสำเนา B
-    const tempIterations = []; // Array สำหรับเก็บการ iteration
+    const isMatrixAComplete = matrixA.flat().every(num => !isNaN(num));
+    const isMatrixBComplete = matrixB.every(num => !isNaN(num));
+
+    if (!isMatrixAComplete || !isMatrixBComplete) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill all fields in Matrix.',
+        icon: 'error',
+        confirmButtonText: 'Okay'
+      });
+      return;
+    }
+
+    let A = JSON.parse(JSON.stringify(matrixA));
+    let B = [...matrixB]; 
+    const tempIterations = [];
 
     for (let i = 0; i < 3; i++) {
       for (let j = i + 1; j < 3; j++) {
@@ -26,21 +40,27 @@ const GaussianElimination = () => {
         }
         B[j] -= factor * B[i];
       }
-      // เก็บค่าที่อัพเดตใน iteration
+      
       tempIterations.push({
         iteration: i + 1,
-        matrix: A.map(row => row.slice()), // ทำสำเนาของ matrix
+        matrix: A.map(row => row.slice()), 
         result: B
       });
     }
 
-    // คำนวณค่าตัวแปร x1, x2, x3
+    
     let x3 = B[2] / A[2][2];
     let x2 = (B[1] - A[1][2] * x3) / A[1][1];
     let x1 = (B[0] - A[0][1] * x2 - A[0][2] * x3) / A[0][0];
 
     setResults([x1, x2, x3]);
-    setIterations(tempIterations); // อัปเดต state สำหรับ iteration
+    setIterations(tempIterations); 
+    Swal.fire({
+      title: 'Success!',
+      text: 'Calculation completed successfully!',
+      icon: 'success',
+      confirmButtonText: 'Cool!'
+    });
   };
 
   const updateMatrixA = (row, col, value) => {

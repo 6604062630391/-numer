@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Table, Button, Form, Row, Col } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const JacobiMethod = () => {
     const EPSILON = 0.000001;
@@ -54,11 +55,17 @@ const JacobiMethod = () => {
 
             if (converged) break;
         }
-
+            
         setIterations(results);
+        Swal.fire({
+            title: 'Success!',
+            text: 'Calculation completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'Cool!'
+        });
     };
 
-    // ดึงผลลัพธ์สุดท้าย
+
     const finalResult = iterations.length > 0 ? iterations[iterations.length - 1].values : [];
 
     return (

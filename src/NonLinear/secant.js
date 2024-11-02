@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const SecantMethod = () => {
   const [inputValue, setInputValue] = useState("");
@@ -19,15 +20,15 @@ const SecantMethod = () => {
     do {
       const f0 = func(x0, a);
       const f1 = func(x1, a);
-      // คำนวณค่า x ใหม่
+      
       x = x1 - (f1 * (x1 - x0)) / (f1 - f0);
 
-      // อัปเดต x0 และ x1 สำหรับการวนลูปถัดไป
+      
       x0 = x1;
       x1 = x;
     } while (!(func(x1, a) >= -0.00001 && func(x1, a) <= 0.00001));
 
-    return x1; // คืนค่าผลลัพธ์
+    return x1; 
   }
 
   const handleCalculate = () => {
@@ -35,7 +36,21 @@ const SecantMethod = () => {
     if (!isNaN(a) && a >= 0) {
       const calculatedResult = secantMethod(a);
       setResult(calculatedResult.toFixed(5));
-      setResult("Please enter a valid non-negative number."); 
+       
+      Swal.fire({
+        title: 'Success!',
+        text: 'Calculation completed successfully!',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+    });
+    }else {
+      setResult("Please enter a valid non-negative number.");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please enter a valid non-negative number.',
+        icon: 'error',
+        confirmButtonText: 'Okay'
+    });
     }
   };
 

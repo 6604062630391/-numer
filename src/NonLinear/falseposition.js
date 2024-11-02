@@ -1,13 +1,14 @@
 import { useState } from "react"; 
 import { Button, Container, Form, Row, Col } from "react-bootstrap";
 import { evaluate } from 'mathjs';
+import Swal from 'sweetalert2';
 
 const FalsePosition = () => {
     const [data, setData] = useState([]);
     const [Equation, setEquation] = useState("(x^4)-13");
     const [X, setX] = useState(0);
-    const [XL, setXL] = useState(0);
-    const [XR, setXR] = useState(0);
+    const [XL, setXL] = useState(" ");
+    const [XR, setXR] = useState(" ");
 
     const calculateFalsePosition = (xl, xr) => {
         let xm, fXm, fXl, fXr;
@@ -50,7 +51,22 @@ const FalsePosition = () => {
     const calculateRoot = () => {
         const xlnum = parseFloat(XL);
         const xrnum = parseFloat(XR);
+        if (isNaN(xlnum) || isNaN(xrnum) || Equation.trim() === '') {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please enter the number and the equation!',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            });
+            return;
+        }
         calculateFalsePosition(xlnum, xrnum);
+        Swal.fire({
+            title: 'Success!',
+            text: 'Calculation completed successfully!',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        });
     }
 
     return (
