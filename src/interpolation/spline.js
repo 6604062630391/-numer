@@ -14,7 +14,9 @@ const LinearSplineInterpolation = () => {
         const y = inputY.map(Number);
         const a = parseFloat(inputA);
 
-        if (isNaN(x) || !isNaN(y) || !a) {
+        if (inputX.some(value => value === "" || isNaN(value)) ||
+            inputY.some(value => value === "" || isNaN(value)) ||
+            isNaN(a)) {
             Swal.fire({
                 title: 'Error!',
                 text: 'Please fill in all the input fields.',
