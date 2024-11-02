@@ -72,7 +72,7 @@ const OnePoint = () => {
                 </Button>
             </Form>
             {result !== null && (
-                <h5 style={{ marginTop: "20px" }}>√{inputValue} ≈ {result}</h5>
+                <h5 className="d-flex flex-column align-items-center" style={{ marginTop: "20px" }}>√{inputValue} ≈ {result}</h5>
             )}
         </Container>
     );

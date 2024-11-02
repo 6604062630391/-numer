@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import Swal from 'sweetalert2';
 
+
 const SecantMethod = () => {
   const [inputValue, setInputValue] = useState("");
   const [initialX0, setInitialX0] = useState("2.0");
@@ -9,7 +10,7 @@ const SecantMethod = () => {
   const [result, setResult] = useState(null);
 
   function func(x, a) {
-    return Math.pow(x, 2) - a; // คำนวณ f(x) = x^2 - a
+    return Math.pow(x, 2) - a;
   }
 
   function secantMethod(a) {

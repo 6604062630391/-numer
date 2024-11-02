@@ -96,7 +96,7 @@ const LUDecomposition = () => {
 
   return (
     <Container>
-      <h3 style={{ marginTop: "50px",fontWeight: 'bold' }}>LU Decomposition Calculator</h3>
+      <h3 style={{ marginTop: "50px", fontWeight: 'bold' }}>LU Decomposition Calculator</h3>
       
       <h5 style={{ marginTop: "20px" }}>Matrix A:</h5>
       <Form style={{ marginTop: "20px" }}>
@@ -135,13 +135,19 @@ const LUDecomposition = () => {
         Calculate
       </Button>
 
-      <h5 style={{ marginTop: "40px" }}>Matrix L:</h5>
-      {renderMatrix(L)}
+      <h5 style={{ marginTop: "40px" }}>Results:</h5>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 200px)', gap: '10px' }}>
+        <div>
+          <h5>Matrix L:</h5>
+          {renderMatrix(L)}
+        </div>
+        <div>
+          <h5>Matrix U:</h5>
+          {renderMatrix(U)}
+        </div>
+      </div>
 
-      <h5 style={{ marginTop: "40px" }}>Matrix U:</h5>
-      {renderMatrix(U)}
-
-      <h5 style={{ marginTop: "40px" }}>Values of y:</h5>
+      <h5 style={{ marginTop: "20px" }}>Values of y:</h5>
       {y.length > 0 && (
         <div>
           <p>y1 = {y[0]?.toFixed(2)}</p>
