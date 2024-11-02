@@ -1,7 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import {Route, Routes } from 'react-router-dom';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Navbar';
+import Home from './home';
 import Sample from './NonLinear/Sample';
 import CramersRule from './Linear/cramer';
 import FalsePosition from './NonLinear/falseposition';
@@ -11,7 +12,6 @@ import SecantMethod from './NonLinear/secant';
 import GaussianElimination from './Linear/eli';
 import GaussJordan from './Linear/jordan';
 import LUDecomposition from './Linear/Lu';
-import Home from './home';
 import JacobiCalculator from './Linear/jacobi';
 import LinearRegression from './interpolation/regression';
 import LinearSpline from './interpolation/spline';
