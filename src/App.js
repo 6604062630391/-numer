@@ -27,7 +27,7 @@ function App() {
             <Navbar />
             <div style={{ flex: 1 }}>
                 <Routes>
-                    <Route path="/" Component={<Home />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/sample" element={<Sample />} />
                     <Route path="/cramers-rule" element={<CramersRule />} />
                     <Route path="/falseposition" element={<FalsePosition />} /> 
