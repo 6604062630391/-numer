@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/numer/static/css/main.65a711ce.css",
+    "main.js": "/numer/static/js/main.418f699e.js",
+    "static/js/453.d3f3ed04.chunk.js": "/numer/static/js/453.d3f3ed04.chunk.js",
+    "static/media/a.gif": "/numer/static/media/a.26fb41a870bd7a54dbba.gif",
+    "static/media/bakbak-one-devanagari-400-normal.woff2": "/numer/static/media/bakbak-one-devanagari-400-normal.0d09139dce78fe6a2e57.woff2",
+    "static/media/bakbak-one-devanagari-400-normal.woff": "/numer/static/media/bakbak-one-devanagari-400-normal.35846bf2fd9fd6e75cbe.woff",
+    "static/media/logo1.png": "/numer/static/media/logo1.95f833cacae9c60b810a.png",
+    "static/media/bakbak-one-latin-400-normal.woff2": "/numer/static/media/bakbak-one-latin-400-normal.075448d025690fa08215.woff2",
+    "static/media/bakbak-one-latin-400-normal.woff": "/numer/static/media/bakbak-one-latin-400-normal.197d4ca3e452f4c47404.woff",
+    "static/media/bakbak-one-latin-ext-400-normal.woff2": "/numer/static/media/bakbak-one-latin-ext-400-normal.be1c48345a6e364ef129.woff2",
+    "static/media/bakbak-one-latin-ext-400-normal.woff": "/numer/static/media/bakbak-one-latin-ext-400-normal.a52446f6f7c647cd460d.woff",
+    "index.html": "/numer/index.html",
+    "main.65a711ce.css.map": "/numer/static/css/main.65a711ce.css.map",
+    "main.418f699e.js.map": "/numer/static/js/main.418f699e.js.map",
+    "453.d3f3ed04.chunk.js.map": "/numer/static/js/453.d3f3ed04.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.65a711ce.css",
+    "static/js/main.418f699e.js"
+  ]
+}
